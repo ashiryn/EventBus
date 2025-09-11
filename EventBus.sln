@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{DADA0A88-7AE1-425D-B8F2-D90C1C20C727}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "EventBus\EventBus.csproj", "{DADA0A88-7AE1-425D-B8F2-D90C1C20C727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Tests", "EventBus.Tests\EventBus.Tests.csproj", "{FA989BBE-1CF6-459B-ACF6-87B3AF64547B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{DADA0A88-7AE1-425D-B8F2-D90C1C20C727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DADA0A88-7AE1-425D-B8F2-D90C1C20C727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DADA0A88-7AE1-425D-B8F2-D90C1C20C727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA989BBE-1CF6-459B-ACF6-87B3AF64547B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA989BBE-1CF6-459B-ACF6-87B3AF64547B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA989BBE-1CF6-459B-ACF6-87B3AF64547B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA989BBE-1CF6-459B-ACF6-87B3AF64547B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

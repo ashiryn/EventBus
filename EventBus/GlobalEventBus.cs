@@ -1,60 +1,77 @@
-namespace FluffyVoid.Events;
+﻿namespace FluffyVoid.Events;
 
 /// <summary>
-///     Local event bus that can track event subscribers and allowing decoupled raising of events by objects within the project
+///     Global event bus that can track event subscribers and allowing decoupled raising of events by objects within the project
 ///     Thread safe Event Bus
 /// </summary>
-public class LocalEventBus
+[Serializable]
+public class GlobalEventBus
 {
     /// <summary>
-    ///     Event lookup table that associates an event to a list of callbacks
+    ///     Singleton instance member
     /// </summary>
-    private readonly Dictionary<Type, List<Delegate>> _events =
-        new Dictionary<Type, List<Delegate>>();
+    private static GlobalEventBus? s_instance;
     /// <summary>
     ///     Thread locking object to protect data from being accessed from multiple threads
     /// </summary>
-    private readonly Lock _threadLock = new Lock();
+    private static Lock s_threadLock = new Lock();
+    /// <summary>
+    ///     Event lookup table that associates an event to a list of callbacks
+    /// </summary>
+    private Dictionary<Type, List<Delegate>> _events;
+    /// <summary>
+    ///     Instance property that creates the instance during the first call to the EventBus, otherwise the EventBus
+    ///     is unallocated
+    /// </summary>
+    private static GlobalEventBus Instance =>
+        s_instance ??= new GlobalEventBus();
+
+    /// <summary>
+    ///     Default constructor used to initialize the event bus
+    /// </summary>
+    private GlobalEventBus()
+    {
+        _events = new Dictionary<Type, List<Delegate>>();
+    }
 
     /// <summary>
     ///     Returns the current count of subscribers for a desired event type
     /// </summary>
     /// <typeparam name="TEvent">The type of event to get the count of subscribers for</typeparam>
     /// <returns>The number of subscribers to the event</returns>
-    public int Count<TEvent>()
+    public static int Count<TEvent>()
         where TEvent : EventArgs
     {
         int count = 0;
         Type eventKey = typeof(TEvent);
-        lock (_threadLock)
+        lock (s_threadLock)
         {
-            if (_events.ContainsKey(eventKey))
+            if (Instance._events.ContainsKey(eventKey))
             {
-                count = _events[eventKey].Count;
+                count = Instance._events[eventKey].Count;
             }
         }
 
         return count;
     }
-
     /// <summary>
     ///     Publishes an event out to all subscribed listeners
     /// </summary>
     /// <param name="sender">The publisher of the event</param>
     /// <param name="eventArgs">The event data sent with the event</param>
     /// <typeparam name="TEvent">The type of event to publish</typeparam>
-    public void Publish<TEvent>(object sender, TEvent eventArgs)
+    public static void Publish<TEvent>(object sender, TEvent eventArgs)
     {
         Type eventId = typeof(TEvent);
         List<Delegate> callbacks;
-        lock (_threadLock)
+        lock (s_threadLock)
         {
-            if (!_events.ContainsKey(eventId))
+            if (!Instance._events.ContainsKey(eventId))
             {
                 return;
             }
 
-            callbacks = _events[eventId];
+            callbacks = Instance._events[eventId];
         }
 
         for (int index = 0;
@@ -79,9 +96,9 @@ public class LocalEventBus
             }
         }
 
-        lock (_threadLock)
+        lock (s_threadLock)
         {
-            _events[eventId] = callbacks;
+            Instance._events[eventId] = callbacks;
         }
     }
     /// <summary>
@@ -89,18 +106,18 @@ public class LocalEventBus
     /// </summary>
     /// <param name="callback">The callback to subscribe to the event with</param>
     /// <typeparam name="TEvent">The type of event to subscribe to</typeparam>
-    public void Subscribe<TEvent>(Action<object, TEvent> callback)
+    public static void Subscribe<TEvent>(Action<object, TEvent> callback)
         where TEvent : EventArgs
     {
         Type eventId = typeof(TEvent);
-        lock (_threadLock)
+        lock (s_threadLock)
         {
-            if (!_events.ContainsKey(eventId))
+            if (!Instance._events.ContainsKey(eventId))
             {
-                _events[eventId] = new List<Delegate>();
+                Instance._events[eventId] = new List<Delegate>();
             }
 
-            _events[eventId].Add(callback);
+            Instance._events[eventId].Add(callback);
         }
     }
     /// <summary>
@@ -108,18 +125,18 @@ public class LocalEventBus
     /// </summary>
     /// <param name="callback">The callback to unsubscribe from the event with</param>
     /// <typeparam name="TEvent">The type of event to unsubscribe from</typeparam>
-    public void Unsubscribe<TEvent>(Action<object, TEvent> callback)
+    public static void Unsubscribe<TEvent>(Action<object, TEvent> callback)
         where TEvent : EventArgs
     {
         Type eventId = typeof(TEvent);
-        lock (_threadLock)
+        lock (s_threadLock)
         {
-            if (!_events.ContainsKey(eventId))
+            if (!Instance._events.ContainsKey(eventId))
             {
                 return;
             }
 
-            _events[eventId].Remove(callback);
+            Instance._events[eventId].Remove(callback);
         }
     }
 }
