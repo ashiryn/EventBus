@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>FluffyVoid.Events</RootNamespace>
+        <AssemblyName>FluffyVoid.Events</AssemblyName>
+        <PackageId>FluffyVoid.Events</PackageId>
+        <Title>Events</Title>
+        <Authors>FluffyVoid</Authors>
+        <Description>Thread-safe C# event bus framework that allows for subscribing and publishing events in a decoupled method.</Description>
+        <Company>FluffyVoid</Company>
+        <Product>FluffyVoid.Events</Product>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+    </PropertyGroup>
+
+</Project>
