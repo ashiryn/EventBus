@@ -14,7 +14,7 @@ public class LocalEventBus
     /// <summary>
     ///     Thread locking object to protect data from being accessed from multiple threads
     /// </summary>
-    private readonly Lock _threadLock = new Lock();
+    private readonly object _threadLock = new object();
 
     /// <summary>
     ///     Returns the current count of subscribers for a desired event type

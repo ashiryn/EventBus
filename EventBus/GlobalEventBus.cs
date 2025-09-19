@@ -14,7 +14,7 @@ public class GlobalEventBus
     /// <summary>
     ///     Thread locking object to protect data from being accessed from multiple threads
     /// </summary>
-    private static Lock s_threadLock = new Lock();
+    private static object s_threadLock = new object();
     /// <summary>
     ///     Event lookup table that associates an event to a list of callbacks
     /// </summary>
