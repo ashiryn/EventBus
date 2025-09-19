@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -13,18 +13,23 @@
         <Description>Thread-safe C# event bus framework that allows for subscribing and publishing events in a decoupled method.</Description>
         <Company>FluffyVoid</Company>
         <Product>FluffyVoid.EventBus</Product>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.0.2</AssemblyVersion>
+        <FileVersion>1.0.2</FileVersion>
         <RepositoryUrl>https://github.com/ashiryn/EventBus</RepositoryUrl>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <DocumentationFile>bin\Debug\EventBus.xml</DocumentationFile>
+        <DocumentationFile>bin/Debug/FluffyVoid.EventBus.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <DocumentationFile>bin\Release\EventBus.xml</DocumentationFile>
+        <DocumentationFile>bin/Release/FluffyVoid.EventBus.xml</DocumentationFile>
     </PropertyGroup>
-
+	<ItemGroup>
+        <None Include="bin/$(Configuration)/FluffyVoid.EventBus.xml" Pack="true">
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+            <PackageFlatten>true</PackageFlatten>
+        </None>
+	</ItemGroup>
 </Project>
