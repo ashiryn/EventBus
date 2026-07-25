@@ -13,10 +13,10 @@
         <Description>Thread-safe C# event bus framework that allows for subscribing and publishing events in a decoupled method.</Description>
         <Company>FluffyVoid</Company>
         <Product>FluffyVoid.EventBus</Product>
-        <AssemblyVersion>1.0.3</AssemblyVersion>
-        <FileVersion>1.0.3</FileVersion>
+        <AssemblyVersion>1.0.4</AssemblyVersion>
+        <FileVersion>1.0.4</FileVersion>
         <RepositoryUrl>https://github.com/ashiryn/EventBus</RepositoryUrl>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -26,10 +26,10 @@
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <DocumentationFile>bin/Release/FluffyVoid.EventBus.xml</DocumentationFile>
     </PropertyGroup>
-	<ItemGroup>
+    <ItemGroup>
         <None Include="bin/$(Configuration)/FluffyVoid.EventBus.xml" Pack="true">
             <PackageCopyToOutput>true</PackageCopyToOutput>
             <PackageFlatten>true</PackageFlatten>
         </None>
-	</ItemGroup>
+    </ItemGroup>
 </Project>
