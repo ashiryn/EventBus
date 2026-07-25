@@ -17,7 +17,28 @@ namespace FluffyVoid.EventBus
         ///     threads
         /// </summary>
         private readonly object _threadLock = new object();
-
+        /// <summary>
+        ///     Clears all events from the event bus, refreshing it for use
+        /// </summary>
+        public void Clear()
+        {
+            lock (_threadLock)
+            {
+                _events.Clear();
+            }
+        }
+        /// <summary>
+        ///     Clears all subscribers from a single event
+        /// </summary>
+        /// <typeparam name="TEvent">The event type to clear from the event bus</typeparam>
+        public void Clear<TEvent>()
+            where TEvent : EventArgs
+        {
+            lock (_threadLock)
+            {
+                _events.Remove(typeof(TEvent));
+            }
+        }
         /// <summary>
         ///     Returns the current count of subscribers for a desired event type
         /// </summary>
@@ -38,7 +59,6 @@ namespace FluffyVoid.EventBus
 
             return count;
         }
-
         /// <summary>
         ///     Publishes an event out to all subscribed listeners
         /// </summary>

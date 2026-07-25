@@ -13,10 +13,10 @@
         <Description>Thread-safe C# event bus framework that allows for subscribing and publishing events in a decoupled method.</Description>
         <Company>FluffyVoid</Company>
         <Product>FluffyVoid.EventBus</Product>
-        <AssemblyVersion>1.0.4</AssemblyVersion>
-        <FileVersion>1.0.4</FileVersion>
+        <AssemblyVersion>1.0.5</AssemblyVersion>
+        <FileVersion>1.0.5</FileVersion>
         <RepositoryUrl>https://github.com/ashiryn/EventBus</RepositoryUrl>
-        <Version>1.0.4</Version>
+        <Version>1.0.5</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
