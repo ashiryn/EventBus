@@ -64,6 +64,7 @@
         /// <param name="eventArgs">The event data sent with the event</param>
         /// <typeparam name="TEvent">The type of event to publish</typeparam>
         public static void Publish<TEvent>(object sender, TEvent eventArgs)
+            where TEvent : EventArgs
         {
             Type           eventId = typeof(TEvent);
             List<Delegate> callbacks;
